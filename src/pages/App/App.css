@@ -1,38 +1,79 @@
-.App {
-  text-align: center;
+/* CSS Custom Properties */
+:root {
+  --primary-color: #c32b42;    /* Red */
+  --secondary-color: #F7A007;  /* Orange */
+  --background-color: #A5E9E8;  /* Teal */
+  --text-color: #262E57;       /* Dark Gray */
+  --right-panel-color: #F8F8F8; /* Light Gray */
+  --vertical-nav-color: #FFD700; /* Gold */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Header */
+.header {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  /* Add any additional styles for the header */
+  padding: 1rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Left Navigation */
+.left-nav {
+  background-color: var(--right-panel-color);
+  /* Add any additional styles for the left navigation */
+  width: 200px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Front Page Content */
+.front-page-content {
+  /* Add any additional styles for the front page content */
+  flex: 1;
+}
+
+/* Right Panel */
+.right-panel {
+  background-color: var(--right-panel-color);
+  /* Add any additional styles for the right panel */
+  width: 200px;
+}
+
+/* Footer */
+.footer {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  /* Add any additional styles for the footer */
+  padding: 1rem;
+}
+
+/* Layout */
+.layout {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
+.main-content {
+  display: flex;
+  flex: 1;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.left-nav,
+.front-page-content,
+.right-panel {
+  padding: 1rem;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+
+  .main-content {
+    flex-direction: column;
+  }
+
+  .left-nav,
+  .right-panel {
+    width: 100%;
   }
 }

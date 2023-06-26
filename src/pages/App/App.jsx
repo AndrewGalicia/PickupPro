@@ -3,27 +3,26 @@ import { Routes, Route } from 'react-router-dom';
 import { getUser } from '../../utilities/users-service';
 import './App.css';
 import AuthPage from '../AuthPage/AuthPage';
-import NewOrderPage from '../NewOrderPage/NewOrderPage';
-import OrderHistoryPage from '../OrderHistoryPage/OrderHistoryPage';
-import NavBar from '../../components/NavBar/NavBar';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import LeftNav from '../../components/LeftNav/LeftNav';
+import RightPanel from '../../components/RightPanel/RightPanel';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
 
   return (
     <main className="App">
-      { user ?
-          <>
-            <NavBar user={user} setUser={setUser} />
-            <Routes>
-              {/* Route components in here */}
-              <Route path="/orders/new" element={<NewOrderPage />} />
-              <Route path="/orders" element={<OrderHistoryPage />} />
-            </Routes>
-          </>
-          :
-          <AuthPage setUser={setUser} />
-      }
+      <header className="header"><Header/></header>
+      <div className="layout">
+        {/* <header className="header">header goes here</header> */}
+        <div className="main-content">
+          <nav className="left-nav"><LeftNav/></nav>
+          <div className="front-page-content">front page content goes here</div>
+          <aside className="right-panel"><RightPanel/></aside>
+        </div>
+      </div>
+      <footer className="footer"><Footer/></footer>
     </main>
   );
 }
