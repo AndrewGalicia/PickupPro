@@ -16,13 +16,6 @@
   padding: 1rem;
 }
 
-/* Left Navigation */
-.left-nav {
-  background-color: var(--right-panel-color);
-  /* Add any additional styles for the left navigation */
-  width: 200px;
-}
-
 /* Front Page Content */
 .front-page-content {
   /* Add any additional styles for the front page content */
@@ -34,14 +27,6 @@
   background-color: var(--right-panel-color);
   /* Add any additional styles for the right panel */
   width: 200px;
-}
-
-/* Footer */
-.footer {
-  background-color: var(--primary-color);
-  color: var(--background-color);
-  /* Add any additional styles for the footer */
-  padding: 1rem;
 }
 
 /* Layout */

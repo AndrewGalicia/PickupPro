@@ -1,0 +1,36 @@
+/* Left Navigation */
+.left-nav {
+  background-color: var(--vertical-nav-color /* Gold */
+  );
+  width: 200px;
+}
+
+.left-nav a {
+  display: block;
+  padding: 1rem;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  border-bottom: 1px solid var(--text-color);
+}
+
+
+
+
+.left-nav a.special {
+  font-weight: bold;
+  color: #ff7f50; /* Example color, you can change it to your preference */
+  /* Add any additional styles to make it more special */
+  background-color: var(--text-color) ;
+  border: solid aquamarine;
+}
+
+.left-nav a.active {
+   background-color: var(--primary-color);
+   color: var(--background-color);
+}
+
+.left-nav a:hover {
+   background-color: var(--primary-color);
+   color: var(--background-color);
+}

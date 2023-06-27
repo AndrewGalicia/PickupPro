@@ -1,0 +1,6 @@
+/* Right Panel */
+.right-panel {
+  background-color: var(--right-panel-color);
+  /* Add any additional styles for the right panel */
+  width: 200px;
+}
