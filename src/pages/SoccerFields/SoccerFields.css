@@ -1,0 +1,9 @@
+.map-container {
+    width: 80%;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    border: solid;
+  }

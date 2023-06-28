@@ -8,6 +8,7 @@ import Footer from '../../components/Footer/Footer';
 import LeftNav from '../../components/LeftNav/LeftNav';
 import RightPanel from '../../components/RightPanel/RightPanel';
 import CreateGame from '../CreateGame/CreateGame';
+import SoccerFields from '../SoccerFields/SoccerFields';
 import GameDetails from '../GameDetails/GameDetails';
 import PickUpGames from '../PickUpGames/PickUpGames';
 import Profile from '../Profile/Profile';
@@ -54,6 +55,7 @@ export default function App() {
               <Route path="/games/:id" element={<GameDetails />} />
               <Route path="/login" element={<LoginForm setUser={setUser} />} />
               <Route path="/signup" element={<SignUpForm />} />
+              <Route path="/fields" element={<SoccerFields />} />
             </Routes>
           </div>
           <RightPanel />
