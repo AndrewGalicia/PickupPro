@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+
+import Map from '../../components/Map/Map'
 import './SoccerFields.css';
 
-// import dotenv from 'dotenv';
-// dotenv.config()
 
 export default function SoccerField() {
     const { isLoaded } = useLoadScript({
@@ -11,17 +11,12 @@ export default function SoccerField() {
     });
 
     if (!isLoaded) return <div>Loading...</div>;
-    return <Map />;
-}
-
-function Map() {
-    const center = useMemo(() => ({ lat: 37.77, lng: -122 }), []);
-
     return (
-        <GoogleMap zoom={10} center={center} mapContainerClassName="map-container">
-            <Marker position={center} />
-        </GoogleMap>
-    );
+    <div className="FieldPage">
+      <h1>Soccer Fields</h1>
+      <Map />
+    </div>
+  )
 }
 
-// process.env.SECRET
+

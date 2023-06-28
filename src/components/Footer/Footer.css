@@ -1,9 +1,8 @@
 footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 1vmin;
     background-color: var(--primary-color);
-    color: var(--text-color);
+    color: var(--background-color);
+    padding: .6vmin;
+    text-align: center;
+    font-size: 2vmin;
+    margin-top: auto;
   }
