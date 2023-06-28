@@ -1,5 +1,10 @@
-import { useState, useMemo } from "react";
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import { useState } from "react";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  InfoWindow,
+} from "@react-google-maps/api";
 import './SoccerFields.css'
 import usePlacesAutocomplete, {
   getGeocode,
@@ -32,11 +37,33 @@ export default function SoccerFields() {
   });
 
   const [selected, setSelected] = useState(null);
+  const [nearbyParks, setNearbyParks] = useState([]);
+  const [selectedPark, setSelectedPark] = useState(null);
 
   const handleSelect = async (address) => {
     const results = await getGeocode({ address });
     const { lat, lng } = await getLatLng(results[0]);
     setSelected({ lat, lng });
+
+    // Fetch nearby parks with the keyword "soccer field"
+    const service = new window.google.maps.places.PlacesService(
+      document.createElement("div")
+    );
+    const request = {
+      location: { lat, lng },
+      radius: 1000, // Adjust the radius as per your requirement
+      keyword: "soccer field",
+      type: "park",
+    };
+    service.nearbySearch(request, (results, status) => {
+      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+        setNearbyParks(results);
+      }
+    });
+  };
+
+  const handleMarkerClick = (park) => {
+    setSelectedPark(park);
   };
 
   const renderMap = () => {
@@ -47,6 +74,50 @@ export default function SoccerFields() {
         mapContainerStyle={mapContainerStyle}
       >
         {selected && <Marker position={selected} />}
+        {nearbyParks.map((park) => (
+          <Marker
+            key={park.place_id}
+            position={{
+              lat: park.geometry.location.lat(),
+              lng: park.geometry.location.lng(),
+            }}
+            icon={{
+              url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+              scaledSize: new window.google.maps.Size(30, 30),
+            }}
+            onClick={() => handleMarkerClick(park)}
+          />
+        ))}
+        {selectedPark && (
+        <InfoWindow
+        position={{
+          lat: selectedPark.geometry.location.lat(),
+          lng: selectedPark.geometry.location.lng(),
+        }}
+        onCloseClick={() => setSelectedPark(null)}
+      >
+        <div>
+          <h2>
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${selectedPark.geometry.location.lat()},${selectedPark.geometry.location.lng()}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {selectedPark.name}
+            </a>
+          </h2>
+          <p>{selectedPark.vicinity}</p>
+          {selectedPark.photos && selectedPark.photos[0] && (
+            <img
+              src={selectedPark.photos[0].getUrl()}
+              alt={selectedPark.name}
+              style={{ maxWidth: "200px" }}
+            />
+          )}
+        </div>
+      </InfoWindow>
+      
+        )}
       </GoogleMap>
     );
   };
