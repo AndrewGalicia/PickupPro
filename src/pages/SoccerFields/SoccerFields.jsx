@@ -14,62 +14,83 @@ import {
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 
+const libraries = ["places"];
+const mapContainerStyle = {
+  width: "60vh",
+  height: "500px",
+};
+
+const center = {
+  lat: 37.8,
+  lng: -122.27
+};
+
 export default function SoccerFields() {
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-    libraries: ["places"],
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+    libraries,
   });
 
-  if (!isLoaded) return <div>Loading...</div>;
-  return <Map />;
-}
-
-function Map() {
-  const center = useMemo(() => ({ lat: 43.45, lng: -80.49 }), []);
   const [selected, setSelected] = useState(null);
 
-  return (
-    <>
-      <div className="places-container">
-        <PlacesAutocomplete setSelected={setSelected} />
-      </div>
-
-      <GoogleMap
-        zoom={10}
-        center={center}
-        mapContainerClassName="map-container"
-      >
-        {selected && <Marker position={selected} />}
-      </GoogleMap>
-    </>
-  );
-}
-
-const PlacesAutocomplete = ({ setSelected }) => {
-  const {
-    ready,
-    value,
-    setValue,
-    suggestions: { status, data },
-    clearSuggestions,
-  } = usePlacesAutocomplete();
-
   const handleSelect = async (address) => {
-    setValue(address, false);
-    clearSuggestions();
-
     const results = await getGeocode({ address });
     const { lat, lng } = await getLatLng(results[0]);
     setSelected({ lat, lng });
+  };
+
+  const renderMap = () => {
+    return (
+      <GoogleMap
+        zoom={12}
+        center={selected ? selected : center}
+        mapContainerStyle={mapContainerStyle}
+      >
+        {selected && <Marker position={selected} />}
+      </GoogleMap>
+    );
+  };
+
+  if (loadError) {
+    return <div>Error loading maps</div>;
+  }
+
+  return (
+    <div className="Field-Page">
+      <h1>Soccer Fields</h1>
+      {isLoaded ? (
+        <div className="places-container">
+          <PlacesAutocomplete handleSelect={handleSelect} />
+          {renderMap()}
+        </div>
+      ) : (
+        <div>Loading...</div>
+      )}
+    </div>
+  );
+}
+
+const PlacesAutocomplete = ({ handleSelect }) => {
+  const {
+    ready,
+    value,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestions,
+  } = usePlacesAutocomplete({
+    debounce: 300,
+  });
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
   };
 
   return (
     <Combobox onSelect={handleSelect}>
       <ComboboxInput
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={handleChange}
         disabled={!ready}
-        className="combobox-input"
         placeholder="Search an address"
       />
       <ComboboxPopover>
@@ -83,6 +104,3 @@ const PlacesAutocomplete = ({ setSelected }) => {
     </Combobox>
   );
 };
-
-
-
