@@ -42,6 +42,7 @@ export default function App() {
           onLogin={handleLogin}
           onSignup={handleSignup}
           onLogout={handleLogout}
+          user={user} setUser={setUser}
         />
       </header>
       <div className="layout">
@@ -55,6 +56,7 @@ export default function App() {
               <Route path="/games/:id" element={<GameDetails />} />
               <Route path="/login" element={<LoginForm setUser={setUser} />} />
               <Route path="/signup" element={<SignUpForm />} />
+              <Route path="/auth" element={<AuthPage setUser={setUser} />} />
               <Route path="/fields" element={<SoccerFields />} />
             </Routes>
           </div>

@@ -15,10 +15,14 @@ export default function LeftNav() {
 
   return (
     <nav className='left-nav'>
-      <Link to="/new" className='special'> PickUp Time!</Link>
-      <Link to="/"> Find a Game </Link>
-      <Link to="/fields"> Soccer Field </Link>
-      <Link to="/profile" className={user ? '' : 'disabled-link'} onClick={handleProfileClick}>
+      <Link to="/new" className={user ? 'special' : 'disabled-link'}>PickUp Time!</Link>
+      <Link to="/">Find a Game</Link>
+      <Link to="/fields">Soccer Field</Link>
+      <Link
+        to="/profile"
+        className={user ? '' : 'disabled-link'}
+        onClick={handleProfileClick}
+      >
         Profile
       </Link>
       {showLoginMessage && (
@@ -27,5 +31,5 @@ export default function LeftNav() {
         </div>
       )}
     </nav>
-  )
+  );
 }
