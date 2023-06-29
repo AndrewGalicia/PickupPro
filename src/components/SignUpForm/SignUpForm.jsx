@@ -1,12 +1,18 @@
 import { Component } from 'react';
 import { signUp } from '../../utilities/users-service';
-import './SignUpForm.css'
+import './SignUpForm.css';
+
 export default class SignUpForm extends Component {
   state = {
-    name: '',
+    username: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     confirm: '',
+    instagram: '',
+    city: '',
+    skillLevel: '',
     error: ''
   };
 
@@ -20,16 +26,29 @@ export default class SignUpForm extends Component {
   handleSubmit = async (evt) => {
     evt.preventDefault();
     try {
-      const {name, email, password} = this.state;
-      const formData = {name, email, password};
-      // The promise returned by the signUp service
-      // method will resolve to the user object included
-      // in the payload of the JSON Web Token (JWT)
+      const {
+        username,
+        firstName,
+        lastName,
+        email,
+        password,
+        instagram,
+        city,
+        skillLevel
+      } = this.state;
+      const formData = {
+        username,
+        firstName,
+        lastName,
+        email,
+        password,
+        instagram,
+        city,
+        skillLevel
+      };
       const user = await signUp(formData);
       this.props.setUser(user);
     } catch {
-      // An error occurred
-      // Probably due to a duplicate email
       this.setState({ error: 'Sign Up Failed - Try Again' });
     }
   };
@@ -38,17 +57,91 @@ export default class SignUpForm extends Component {
     const disable = this.state.password !== this.state.confirm;
     return (
       <div>
-        <div className="form-container">
+        <div className="signup-form-container">
           <form autoComplete="off" onSubmit={this.handleSubmit}>
-            <label>Name</label>
-            <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required />
-            <label>Email</label>
-            <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required />
-            <label>Password</label>
-            <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
-            <label>Confirm</label>
-            <input type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} required />
-            <button type="submit" disabled={disable}>SIGN UP</button>
+            <div className='sign-form-a'>
+              <label>Username</label>
+              <input
+                type="text"
+                name="username"
+                value={this.state.username}
+                onChange={this.handleChange}
+                required
+              />
+              <label>First Name</label>
+              <input
+                type="text"
+                name="firstName"
+                value={this.state.firstName}
+                onChange={this.handleChange}
+                required
+              />
+              <label>Last Name</label>
+              <input
+                type="text"
+                name="lastName"
+                value={this.state.lastName}
+                onChange={this.handleChange}
+                required
+              />
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            <div className='sign-form-b'>
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+                required
+              />
+              <label>Confirm Password</label>
+              <input
+                type="password"
+                name="confirm"
+                value={this.state.confirm}
+                onChange={this.handleChange}
+                required
+              />
+              <label>Instagram</label>
+              <input
+                type="text"
+                name="instagram"
+                value={this.state.instagram}
+                onChange={this.handleChange}
+              />
+              <label>City</label>
+              <input
+                type="text"
+                name="city"
+                value={this.state.city}
+                onChange={this.handleChange}
+                required
+              />
+              <label>Skill Level</label>
+              <select
+                name="skillLevel"
+                value={this.state.skillLevel}
+                onChange={this.handleChange}
+                required
+              >
+                <option value="">Select Skill Level</option>
+                <option value="beginner">Beginner</option>
+                <option value="casual">Casual</option>
+                <option value="expert">Expert</option>
+                <option value="pro">Pro</option>
+              </select>
+            </div>
+            <button type="submit" disabled={disable}>
+              SIGN UP
+            </button>
           </form>
         </div>
         <p className="error-message">&nbsp;{this.state.error}</p>

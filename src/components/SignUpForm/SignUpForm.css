@@ -1,0 +1,25 @@
+.signup-form-container {
+    padding: 3vmin;
+    background-color: var(--text-color);
+    border: .1vmin solid var(--primary-color);
+    border-radius: 1vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.sign-form-a {
+    color: white;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+}
+.sign-form-b {
+    color: white;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+}

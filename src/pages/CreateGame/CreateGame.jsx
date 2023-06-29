@@ -137,7 +137,7 @@ const CreateGame = () => {
   }
 
   return (
-    <div className='Create-Game-Page'>
+    <div>
       <h2>Create Game</h2>
       <form onSubmit={handleSubmit}>
         <label>

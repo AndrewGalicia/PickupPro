@@ -18,16 +18,16 @@ export default function Header({ user, setUser }) {
 //           PickUpPro
 //         </Link>
    
-   </div>
+      </div>
       <div className='header-right'>
       { user ?
           <>
+            <span>Welcome, {user.username}...</span>
             <p><Link className="header-button" to="" onClick={handleLogOut}>Log Out</Link></p>
           </>
           :
           <Link className="header-button" to="/auth"> Login/SignUp </Link>
       }
-
       </div>
     </header>
   )

@@ -3,3 +3,10 @@
     align-items: center;
     justify-content: center;
 }
+
+.create-game-form-container {
+    padding: 3vmin;
+    background-color: var(--background-color);
+    border: .1vmin solid var(--primary-color);
+    border-radius: 1vmin;
+  }
