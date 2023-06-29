@@ -1,4 +1,4 @@
-const Game = require('../models/game');
+const Game = require('../../models/game');
 
 // POST /api/games
 const createGame = async (req, res) => {
