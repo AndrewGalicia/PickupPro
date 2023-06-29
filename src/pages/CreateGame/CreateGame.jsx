@@ -11,6 +11,8 @@ import {
   ComboboxOption,
 } from '@reach/combobox';
 import '@reach/combobox/styles.css';
+import { createGame } from '../../utilities/games-api'
+
 
 const CreateGame = () => {
   const [title, setTitle] = useState('');
@@ -24,7 +26,7 @@ const CreateGame = () => {
     setLocation(address);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Use the selected location for game creation
@@ -35,9 +37,21 @@ const CreateGame = () => {
       location,
     };
 
-    // Perform the necessary logic for game creation
-    console.log(newGame);
-  };
+    const handleAddGame = async (newGame) => {
+        try {
+          const createdGame = await createGame(newGame);
+          console.log('Game created:', createdGame);
+          // Handle successful game creation
+        } catch (error) {
+          console.error(error);
+          // Handle error during game creation
+        }
+      };
+    };
+
+
+ 
+
 
   return (
     <div>
@@ -90,36 +104,49 @@ const CreateGame = () => {
 };
 
 const PlacesAutocomplete = ({ handleSelect, setValue }) => {
-  const {
-    ready,
-    value,
-    suggestions: { status, data },
-  } = usePlacesAutocomplete({
-    debounce: 300,
-  });
+    const {
+      ready,
+      value,
+      suggestions: { status, data },
+      setValue: setAutocompleteValue, // Rename the function to avoid conflicts
+      clearSuggestions, // Function to clear suggestions
+    } = usePlacesAutocomplete({
+      debounce: 300,
+    });
+  
+    const handleChange = (e) => {
+      setValue(e.target.value);
+      setAutocompleteValue(e.target.value); // Pass the value to the usePlacesAutocomplete hook
+    };
+  
+    const handleClearSuggestions = () => {
+      setValue(''); // Clear the input field value
+      clearSuggestions(); // Clear the suggestions
+    };
 
-  const handleChange = (e) => {
-    setValue(e.target.value);
+    const handleSelectSuggestion = (address) => {
+        setValue(address); // Update the input value with the selected address
+        handleSelect(address); // Call the parent component's handleSelect function
+      };
+    
+  
+    return (
+      <Combobox onSelect={handleSelectSuggestion}>
+        <ComboboxInput
+          value={value}
+          onChange={handleChange}
+          disabled={!ready}
+          placeholder="Search an address"
+        />
+        <ComboboxPopover>
+          <ComboboxList>
+            {status === 'OK' &&
+              data.map(({ place_id, description }) => (
+                <ComboboxOption key={place_id} value={description} />
+              ))}
+          </ComboboxList>
+        </ComboboxPopover>
+      </Combobox>
+    );
   };
-
-  return (
-    <Combobox onSelect={handleSelect}>
-      <ComboboxInput
-        value={value}
-        onChange={handleChange}
-        disabled={!ready}
-        placeholder="Search an address"
-      />
-      <ComboboxPopover>
-        <ComboboxList>
-          {status === 'OK' &&
-            data.map(({ place_id, description }) => (
-              <ComboboxOption key={place_id} value={description} />
-            ))}
-        </ComboboxList>
-      </ComboboxPopover>
-    </Combobox>
-  );
-};
-
 export default CreateGame;

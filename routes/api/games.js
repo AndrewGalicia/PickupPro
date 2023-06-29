@@ -3,6 +3,11 @@ const gamesCtrl = require('../../controllers/api/games');
 
 const router = express.Router();
 
-// All paths start with '/api/users'
-// POST /api/users (create a user - sign up)
-router.post('/', gamesCtrl.create);
+// All paths start with '/api/games'
+// POST /api/games (create a game)
+router.post('/', gamesCtrl.createGame);
+
+// GET /api/games (index all games)
+router.get('/', gamesCtrl.getGames);
+
+module.exports = router;
