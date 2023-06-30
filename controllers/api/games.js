@@ -3,13 +3,14 @@ const Game = require('../../models/game');
 // POST /api/games
 const createGame = async (req, res) => {
   try {
-    const { title, date, skillLevelRequirement, location } = req.body;
+    const { title, date, skillLevelRequirement, address, city } = req.body;
 
     const newGame = new Game({
       title,
       date,
       skillLevelRequirement,
-      location,
+      address,
+      city,
       // admin: req.user._id, // Assuming you have implemented user authentication and have access to the logged-in user ID
       participants: [], // Initially, no participants are added
     });

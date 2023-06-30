@@ -8,7 +8,8 @@ const gameSchema = new Schema({
     type: String,
     enum: ['beginner', 'casual', 'expert', 'pro'],
   },
-  location: { type: String },
+  address: { type: String },
+  city: { type: String },
   participants: [{ type: String}],
 });
 

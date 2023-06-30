@@ -1,0 +1,28 @@
+.pickup-games-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .game-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 20px;
+  }
+  
+  .game-card {
+    flex-basis: calc(33.33% - 20px);
+    max-width: calc(33.33% - 20px);
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    margin: 0 5px;
+  }
+  

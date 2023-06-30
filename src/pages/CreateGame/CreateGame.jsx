@@ -6,7 +6,8 @@ const CreateGame = () => {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
   const [skillLevelRequirement, setSkillLevelRequirement] = useState('');
-  const [location, setLocation] = useState('');
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,7 +18,8 @@ const CreateGame = () => {
       title,
       date,
       skillLevelRequirement,
-      location,
+      address,
+      city,
     };
 
     try {
@@ -70,11 +72,20 @@ const CreateGame = () => {
         </label>
         <br />
         <label>
-          Location:
+          Address:
           <input
             type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          City:
+          <input
+            type="text"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
             required
           />
         </label>
