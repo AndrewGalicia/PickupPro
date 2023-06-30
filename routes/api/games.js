@@ -8,6 +8,6 @@ const router = express.Router();
 router.post('/', gamesCtrl.createGame);
 
 // GET /api/games (index all games)
-router.get('/', gamesCtrl.getGames);
+router.get('/', gamesCtrl.getAll);
 
 module.exports = router;

@@ -1,27 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { getGames } from '../../utilities/games-api'
+import * as gamesAPI from '../../utilities/games-api'
+import GameCard from '../GameCard/GameCard'
 
 
 export default function PickUpGames() {
   const [games, setGames] = useState([]);
 
-  useEffect(() => {
-    getGames();
-  }, []);
-
-  const fetchGames = async () => {
-    try {
-      const fetchedGames = await getGames();
-      setGames(fetchedGames);
-    } catch (error) {
-      console.error(error);
-      // Handle error while fetching games
+  useEffect(function() {
+    async function getGames() {
+      const games = await gamesAPI.getAll();
+      setGames(games)
     }
-  };
+    getGames();
+  }, [])
 
-  useEffect(() => {
-    fetchGames();
-  }, []);
+
+
+  
 
   return (
     <div>
@@ -33,7 +28,4 @@ export default function PickUpGames() {
   );
 }
 
-const GameCard = ({ game }) => {
-  // Render individual game card
-  // ...
-};
+

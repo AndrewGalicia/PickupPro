@@ -24,18 +24,23 @@ const createGame = async (req, res) => {
 };
 
 // GET /api/games
-const getGames = async (req, res) => {
-  try {
-    const games = await Game.find().populate('admin', 'username'); // Assuming the user's username is stored in the 'username' field of the User model
+// const getAll = async (req, res) => {
+//   try {
+//     const games = await Game.find().populate('admin', 'username'); // Assuming the user's username is stored in the 'username' field of the User model
 
-    res.status(200).json(games);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Server Error' });
-  }
-};
+//     res.status(200).json(games);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: 'Server Error' });
+//   }
+// };
+
+async function getAll(req, res) {
+  const games = await Game.find({})
+  res.json(games)
+}
 
 module.exports = {
   createGame,
-  getGames,
+  getAll,
 };
