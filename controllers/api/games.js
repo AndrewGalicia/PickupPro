@@ -10,7 +10,7 @@ const createGame = async (req, res) => {
       date,
       skillLevelRequirement,
       location,
-      admin: req.user._id, // Assuming you have implemented user authentication and have access to the logged-in user ID
+      // admin: req.user._id, // Assuming you have implemented user authentication and have access to the logged-in user ID
       participants: [], // Initially, no participants are added
     });
 

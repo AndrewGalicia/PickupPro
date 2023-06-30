@@ -25,8 +25,8 @@ const userSchema = new Schema({
     type: String,
     enum: ['beginner', 'casual', 'expert', 'pro'],
   },
-  adminGames: [{ type: Schema.Types.ObjectId, ref: 'Game' }],
-  participantGames: [{ type: Schema.Types.ObjectId, ref: 'Game' }],
+  // adminGames: [{ type: Schema.Types.ObjectId, ref: 'Game' }],
+  participantGames: [{ type: String }],
 }, {
   timestamps: true,
   toJSON: {
