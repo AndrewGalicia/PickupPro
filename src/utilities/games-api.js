@@ -1,6 +1,4 @@
-// games-api.js
-
-import  sendRequest  from './send-request';
+import sendRequest from './send-request';
 
 const BASE_URL = '/api/games';
 
@@ -14,16 +12,10 @@ export async function createGame(newGame) {
   }
 }
 
-// export async function getGames() {
-//   try {
-//     const fetchedGames = await sendRequest(BASE_URL);
-//     return fetchedGames;
-//   } catch (error) {
-//     console.error(error);
-//     throw error;
-//   }
-// }
-
 export function getAll() {
-  return sendRequest(BASE_URL)
-};
+  return sendRequest(BASE_URL);
+}
+
+export async function getById(id) {
+  return sendRequest(`${BASE_URL}/${id}`);
+}

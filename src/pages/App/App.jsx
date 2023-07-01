@@ -63,7 +63,7 @@ export default function App() {
           <RightPanel />
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </main>
   );
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import './GameCard.css';
+import { Link } from 'react-router-dom';
 
 export default function GameCard({ game }) {
   const { title, date, skillLevelRequirement, city, participants } = game;
@@ -18,11 +19,13 @@ export default function GameCard({ game }) {
 
   return (
     <div className="GameCard">
+     <Link to={`/games/${_id}`}>  
       <h2>{title}</h2>
       <p>Date: {formattedDate} {formattedTime}</p>
       <p>Skill Level: {skillLevelRequirement}</p>
       <p>City: {city}</p>
       <p>Participants: {participants.length}</p>
+      </Link>   
     </div>
   );
 }
