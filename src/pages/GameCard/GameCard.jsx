@@ -19,7 +19,7 @@ export default function GameCard({ game }) {
 
   return (
     <div className="GameCard">
-     <Link to={`/games/${_id}`}>  
+     <Link to={`/games/${game._id}`}>  
       <h2>{title}</h2>
       <p>Date: {formattedDate} {formattedTime}</p>
       <p>Skill Level: {skillLevelRequirement}</p>

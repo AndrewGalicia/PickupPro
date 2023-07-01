@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import * as gamesAPI from '../../utilities/games-api';
 
 export default function GameDetails() {
   const { id } = useParams();
   const [game, setGame] = useState(null);
+  const [map, setMap] = useState(null);
 
   useEffect(() => {
     async function fetchGame() {
@@ -18,6 +19,32 @@ export default function GameDetails() {
 
     fetchGame();
   }, [id]);
+
+  useEffect(() => {
+    if (game) {
+      // Initialize the map and marker when the game data is available
+      const geocoder = new window.google.maps.Geocoder();
+      geocoder.geocode({ address: game.address + ', ' + game.city }, (results, status) => {
+        if (status === 'OK' && results[0]) {
+          const { lat, lng } = results[0].geometry.location;
+
+          const mapOptions = {
+            center: { lat: lat(), lng: lng() },
+            zoom: 12,
+          };
+
+          const map = new window.google.maps.Map(document.getElementById('map'), mapOptions);
+          const marker = new window.google.maps.Marker({
+            position: { lat: lat(), lng: lng() },
+            map,
+          });
+          setMap(map);
+        } else {
+          console.error('Geocode was not successful for the following reason:', status);
+        }
+      });
+    }
+  }, [game]);
 
   if (!game) {
     return <div>Loading...</div>;
@@ -45,6 +72,7 @@ export default function GameDetails() {
       <p>Address: {address}</p>
       <p>City: {city}</p>
       <p>Participants: {participants.length}</p>
+      <div id="map" style={{ height: '400px', width: '100%' }}></div>
     </div>
   );
 }
