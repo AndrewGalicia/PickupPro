@@ -53,7 +53,7 @@ export default function App() {
               <Route path="/" element={<PickUpGames />} />
               <Route path="/new" element={<CreateGame />} />
               <Route path="/profile/:id" element={<Profile />} />
-              <Route path="/games/:id" element={<GameDetails />} />
+              <Route path="/games/:id" element={<GameDetails user={user} />} />
               <Route path="/login" element={<LoginForm setUser={setUser} />} />
               <Route path="/signup" element={<SignUpForm />} />
               <Route path="/auth" element={<AuthPage setUser={setUser} />} />

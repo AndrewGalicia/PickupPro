@@ -2,16 +2,18 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import * as gamesAPI from '../../utilities/games-api';
 
-export default function GameDetails() {
+export default function GameDetails({user}) {
   const { id } = useParams();
   const [game, setGame] = useState(null);
   const [map, setMap] = useState(null);
+  const [isInstagramAdded, setIsInstagramAdded] = useState(false);
 
   useEffect(() => {
     async function fetchGame() {
       try {
         const fetchedGame = await gamesAPI.getById(id);
         setGame(fetchedGame);
+        setIsInstagramAdded(fetchedGame.participants.includes('user_instagram_account')); // Replace 'user_instagram_account' with the user's Instagram account value
       } catch (error) {
         console.error(error);
       }
@@ -23,6 +25,29 @@ export default function GameDetails() {
   const handleMapClick = () => {
     // Open Google Maps in a new tab
     window.open('https://maps.google.com', '_blank');
+  };
+
+  const handleToggleInstagram = () => {
+    // Assuming you have a state for the user's Instagram account
+    const userInstagramAccount = user.instagram;
+
+    if (isInstagramAdded) {
+      // Remove the user's Instagram account from the participant array
+      const updatedParticipants = game.participants.filter(
+        (participant) => participant !== userInstagramAccount
+      );
+
+      // Update the game object with the updated participants array
+      const updatedGame = { ...game, participants: updatedParticipants };
+      setGame(updatedGame);
+    } else {
+      // Add the user's Instagram account to the participant array
+      const updatedGame = { ...game, participants: [...game.participants, userInstagramAccount] };
+      setGame(updatedGame);
+    }
+
+    // Toggle the state of isInstagramAdded
+    setIsInstagramAdded(!isInstagramAdded);
   };
 
   useEffect(() => {
@@ -76,7 +101,17 @@ export default function GameDetails() {
       <p>Skill Level: {skillLevelRequirement}</p>
       <p>Address: {address}</p>
       <p>City: {city}</p>
-      <p>Participants: {participants.length}</p>
+      <p>Participants:</p>
+      <ul>
+        {participants.map((participant, index) => (
+          <li key={index}>
+            <a href={`https://www.instagram.com/${participant}/`}>{participant}</a>
+          </li>
+        ))}
+      </ul>
+      <button onClick={handleToggleInstagram}>
+        {isInstagramAdded ? 'Remove Instagram Account' : 'Add Instagram Account'}
+      </button>
       <div
         id="map"
         style={{ height: '400px', width: '100%' }}
