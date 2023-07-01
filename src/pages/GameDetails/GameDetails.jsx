@@ -20,6 +20,11 @@ export default function GameDetails() {
     fetchGame();
   }, [id]);
 
+  const handleMapClick = () => {
+    // Open Google Maps in a new tab
+    window.open('https://maps.google.com', '_blank');
+  };
+
   useEffect(() => {
     if (game) {
       // Initialize the map and marker when the game data is available
@@ -72,7 +77,13 @@ export default function GameDetails() {
       <p>Address: {address}</p>
       <p>City: {city}</p>
       <p>Participants: {participants.length}</p>
-      <div id="map" style={{ height: '400px', width: '100%' }}></div>
+      <div
+        id="map"
+        style={{ height: '400px', width: '100%' }}
+        onClick={handleMapClick}
+      >
+        Click here to view on Google Maps
+      </div>
     </div>
   );
 }
