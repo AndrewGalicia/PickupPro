@@ -14,6 +14,7 @@ import PickUpGames from '../PickUpGames/PickUpGames';
 import Profile from '../Profile/Profile';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
+import UpdateProfile from '../../components/UpdateProfileForm.jsx/UpdateProfileForm';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
@@ -53,6 +54,7 @@ export default function App() {
               <Route path="/" element={<PickUpGames />} />
               <Route path="/new" element={<CreateGame />} />
               <Route path="/profile/:id" element={<Profile />} />
+              <Route path="/profile/update" element={<UpdateProfile profileUser={user}/>} />
               <Route path="/games/:id" element={<GameDetails user={user} />} />
               <Route path="/login" element={<LoginForm setUser={setUser} />} />
               <Route path="/signup" element={<SignUpForm />} />

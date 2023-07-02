@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { updateUser } from '../../utilities/users-service';
 
-export default function UpdateProfileForm({ profileUser }) {
+export default function UpdateProfile({ profileUser }) {
   const [formData, setFormData] = useState({
     username: profileUser.username,
     firstName: profileUser.firstName,

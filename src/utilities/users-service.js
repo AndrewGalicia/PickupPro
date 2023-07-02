@@ -47,3 +47,8 @@ export function checkToken() {
   return usersAPI.checkToken()
     .then(dateStr => new Date(dateStr));
 }
+
+export async function updateUser(userData) {
+  const user = await usersAPI.updateUser(userData);
+  return user;
+}

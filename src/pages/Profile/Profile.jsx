@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getUser } from '../../utilities/users-service';
+import { Link } from 'react-router-dom';
 
 export default function Profile() {
   const [profileUser, setProfileUser] = useState(null);
@@ -27,6 +28,9 @@ export default function Profile() {
       <p>Name: {profileUser.name}</p>
       <p>Email: {profileUser.email}</p>
       {/* Add more profile information here */}
+      <Link to="/profile/update">
+        <button>Edit Profile</button>
+      </Link>
     </div>
   );
 }
