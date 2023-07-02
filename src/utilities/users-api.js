@@ -23,7 +23,7 @@ export async function updateUser(userData) {
     throw new Error('No token found. User is not authenticated.');
   }
 
-  const response = await fetch('/api/users', {
+  const response = await fetch(`/api/users/${userData._id}`, {  // Update the URL to include the user ID
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',

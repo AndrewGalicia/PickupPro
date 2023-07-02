@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { updateUser } from '../../utilities/users-service';
+import { updateUser } from '../../utilities/users-api';
 
 export default function UpdateProfile({ profileUser }) {
   const [formData, setFormData] = useState({
@@ -35,11 +35,10 @@ export default function UpdateProfile({ profileUser }) {
       error: ''
     });
   };
-
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     try {
-      const updatedUser = await updateUser(formData);
+      const updatedUser = await updateUser({ ...formData, _id: profileUser._id });  // Pass the user ID (_id) along with the formData
       console.log('User updated:', updatedUser);
     } catch {
       setFormData((prevFormData) => ({
@@ -48,6 +47,7 @@ export default function UpdateProfile({ profileUser }) {
       }));
     }
   };
+  
 
   const disable = formData.password !== formData.confirm;
 

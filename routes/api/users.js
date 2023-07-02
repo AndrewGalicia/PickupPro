@@ -12,6 +12,6 @@ router.post('/login', usersCtrl.login);
 // GET /api/users/check-token
 router.get('/check-token', ensureLoggedIn, usersCtrl.checkToken);
 // PUT /api/users/:id (update a user)
-router.put('/:id', usersCtrl.updateProfile);
+router.put('/:id', ensureLoggedIn, usersCtrl.updateProfile);
 
 module.exports = router;

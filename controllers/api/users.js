@@ -1,145 +1,79 @@
-import React, { useState, useEffect } from 'react';
-import { updateUser } from '../../utilities/users-service';
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const User = require('../../models/user');
 
-export default function UpdateProfileForm({ profileUser }) {
-  const [formData, setFormData] = useState({
-    username: profileUser.username,
-    firstName: profileUser.firstName,
-    lastName: profileUser.lastName,
-    email: profileUser.email,
-    password: '',
-    confirm: '',
-    instagram: profileUser.instagram,
-    city: profileUser.city,
-    skillLevel: profileUser.skillLevel,
-    error: ''
-  });
+module.exports = {
+  create,
+  login,
+  checkToken,
+  updateProfile
+};
 
-  useEffect(() => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      username: profileUser.username,
-      firstName: profileUser.firstName,
-      lastName: profileUser.lastName,
-      email: profileUser.email,
-      instagram: profileUser.instagram,
-      city: profileUser.city,
-      skillLevel: profileUser.skillLevel
-    }));
-  }, [profileUser]);
+function checkToken(req, res) {
+  console.log('req.user', req.user);
+  res.json(req.exp);
+}
 
-  const handleChange = (evt) => {
-    setFormData({
-      ...formData,
-      [evt.target.name]: evt.target.value,
-      error: ''
-    });
-  };
+async function create(req, res) {
+  try {
+    console.log('Create User Request:', req.body); // Log the request body
+    // Add the user to the db
+    const user = await User.create(req.body);
+    console.log('User created:', user); // Log the created user object
+    const token = createJWT(user);
+    console.log('Token:', token); // Log the generated token
+    res.json(token);
+  } catch (err) {
+    console.error('Create User Error:', err); // Log any error that occurred
+    res.status(400).json(err);
+  }
+}
 
-  const handleSubmit = async (evt) => {
-    evt.preventDefault();
-    try {
-      const updatedUser = await updateUser(formData);
-      console.log('User updated:', updatedUser);
-    } catch {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        error: 'Update Failed - Try Again'
-      }));
-    }
-  };
+async function login(req, res) {
+  try {
+    console.log('Login Request:', req.body); // Log the request body
+    const user = await User.findOne({ email: req.body.email });
+    console.log('User found:', user); // Log the found user object
+    if (!user) throw new Error('User not found');
+    const match = await bcrypt.compare(req.body.password, user.password);
+    console.log('Password match:', match); // Log the result of password comparison
+    if (!match) throw new Error('Invalid password');
+    const token = createJWT(user);
+    console.log('Token:', token); // Log the generated token
+    res.json(token);
+  } catch (err) {
+    console.error('Login Error:', err); // Log any error that occurred
+    res.status(400).json('Bad Credentials');
+  }
+}
 
-  const disable = formData.password !== formData.confirm;
+// controllers/profile.js
 
-  return (
-    <div>
-      <h2>Edit Profile</h2>
-      <form autoComplete="off" onSubmit={handleSubmit}>
-        <div className="sign-form-a">
-          <label>Username</label>
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          />
-          <label>First Name</label>
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            required
-          />
-          <label>Last Name</label>
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            required
-          />
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="sign-form-b">
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-          <label>Confirm Password</label>
-          <input
-            type="password"
-            name="confirm"
-            value={formData.confirm}
-            onChange={handleChange}
-            required
-          />
-          <label>Instagram</label>
-          <input
-            type="text"
-            name="instagram"
-            value={formData.instagram}
-            onChange={handleChange}
-          />
-          <label>City</label>
-          <input
-            type="text"
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
-            required
-          />
-          <label>Skill Level</label>
-          <select
-            name="skillLevel"
-            value={formData.skillLevel}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select Skill Level</option>
-            <option value="beginner">Beginner</option>
-            <option value="casual">Casual</option>
-            <option value="expert">Expert</option>
-            <option value="pro">Pro</option>
-          </select>
-        </div>
-        <button type="submit" disabled={disable}>
-          Update Profile
-        </button>
-      </form>
-      {formData.error && <p className="error-message">{formData.error}</p>}
-    </div>
+
+async function updateProfile(req, res) {
+  try {
+    const { username, firstName, lastName, email, password, instagram, city, skillLevel } = req.body;
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user._id,
+      { username, firstName, lastName, email, password, instagram, city, skillLevel },
+      { new: true }
+    );
+    res.json(updatedUser);
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    res.status(500).json({ error: 'Failed to update profile' });
+  }
+}
+
+
+
+/*--- Helper Functions --*/
+
+function createJWT(user) {
+  return jwt.sign(
+    // data payload
+    { user },
+    process.env.SECRET,
+    { expiresIn: '24h' }
   );
 }
