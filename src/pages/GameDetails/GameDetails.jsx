@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import * as gamesAPI from '../../utilities/games-api';
 
-export default function GameDetails({user}) {
+export default function GameDetails({ user }) {
   const { id } = useParams();
   const [game, setGame] = useState(null);
   const [map, setMap] = useState(null);
@@ -13,46 +13,52 @@ export default function GameDetails({user}) {
       try {
         const fetchedGame = await gamesAPI.getById(id);
         setGame(fetchedGame);
-        setIsInstagramAdded(fetchedGame.participants.includes('user_instagram_account')); // Replace 'user_instagram_account' with the user's Instagram account value
+        setIsInstagramAdded(fetchedGame.participants.includes(user.instagram));
+        console.log('Fetched game:', fetchedGame);
+        console.log('User Instagram:', user.instagram);
+        console.log('Is Instagram Added:', fetchedGame.participants.includes(user.instagram));
       } catch (error) {
         console.error(error);
       }
     }
 
     fetchGame();
-  }, [id]);
+  }, [id, user.instagram]);
 
   const handleMapClick = () => {
-    // Open Google Maps in a new tab
     window.open('https://maps.google.com', '_blank');
   };
 
-  const handleToggleInstagram = () => {
-    // Assuming you have a state for the user's Instagram account
+  const handleToggleInstagram = async () => {
     const userInstagramAccount = user.instagram;
-
+    let updatedGame;
+  
     if (isInstagramAdded) {
-      // Remove the user's Instagram account from the participant array
       const updatedParticipants = game.participants.filter(
         (participant) => participant !== userInstagramAccount
       );
-
-      // Update the game object with the updated participants array
-      const updatedGame = { ...game, participants: updatedParticipants };
-      setGame(updatedGame);
+  
+      updatedGame = { ...game, participants: updatedParticipants };
+      console.log('Updated game (Instagram removed):', updatedGame);
     } else {
-      // Add the user's Instagram account to the participant array
-      const updatedGame = { ...game, participants: [...game.participants, userInstagramAccount] };
-      setGame(updatedGame);
+      updatedGame = { ...game, participants: [...game.participants, userInstagramAccount] };
+      console.log('Updated game (Instagram added):', updatedGame);
     }
-
-    // Toggle the state of isInstagramAdded
+  
     setIsInstagramAdded(!isInstagramAdded);
+  
+    try {
+      // Call the updateGame API function to update the game data in the backend
+      await gamesAPI.updateGame(game._id, updatedGame);
+      setGame(updatedGame); // Update the game state after successful API call
+    } catch (error) {
+      console.error(error);
+    }
   };
+  
 
   useEffect(() => {
     if (game) {
-      // Initialize the map and marker when the game data is available
       const geocoder = new window.google.maps.Geocoder();
       geocoder.geocode({ address: game.address + ', ' + game.city }, (results, status) => {
         if (status === 'OK' && results[0]) {
@@ -69,6 +75,7 @@ export default function GameDetails({user}) {
             map,
           });
           setMap(map);
+          console.log('Map:', map);
         } else {
           console.error('Geocode was not successful for the following reason:', status);
         }

@@ -13,4 +13,7 @@ router.get('/', gamesCtrl.getAll);
 // GET /api/games/:id (get a specific game by ID)
 router.get('/:id', gamesCtrl.getById);
 
+// PUT /api/games/:id (update a game)
+router.put('/:id', gamesCtrl.updateGame);
+
 module.exports = router;

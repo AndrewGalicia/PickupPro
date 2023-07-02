@@ -34,8 +34,30 @@ async function getById(req, res) {
   res.json(game);
 }
 
+async function updateGame(req, res) {
+  try {
+    const { id } = req.params; // Get the game ID from the request params
+    const updatedGame = req.body; // Get the updated game data from the request body
+
+    console.log('Received game ID:', id);
+    console.log('Received game data:', updatedGame);
+
+    // Find the existing game document by ID and update it with the new data
+    const result = await Game.findByIdAndUpdate(id, updatedGame, { new: true });
+
+    console.log('Updated game result:', result);
+
+    res.status(200).json(result); // Respond with the updated game document
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+}
+
+
 module.exports = {
   createGame,
   getAll,
-  getById
+  getById,
+  updateGame
 };

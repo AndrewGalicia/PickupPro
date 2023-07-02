@@ -19,3 +19,16 @@ export function getAll() {
 export async function getById(id) {
   return sendRequest(`${BASE_URL}/${id}`);
 }
+
+export async function updateGame(id, updatedGame) {
+  try {
+    console.log('Updating game:', id, updatedGame);
+    const result = await sendRequest(`${BASE_URL}/${id}`, 'PUT', updatedGame);
+    console.log('Update response:', result);
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
