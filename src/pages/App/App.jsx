@@ -60,7 +60,7 @@ export default function App() {
               <Route path="/fields" element={<SoccerFields />} />
             </Routes>
           </div>
-          <RightPanel />
+          <RightPanel user={user} />
         </div>
       </div>
       {/* <Footer /> */}

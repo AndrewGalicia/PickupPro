@@ -5,7 +5,7 @@ import MyGames from '../../pages/MyGames/MyGames'; // Import the MyGames compone
 import JoinedGames from '../../pages/JoinedGames/JoinedGames'; // Import the JoinedGames component
 import './RightPanel.css';
 
-export default function RightPanel() {
+export default function RightPanel({user}) {
   const [activeView, setActiveView] = useState('myGames');
 
   const handleToggle = () => {
@@ -26,7 +26,7 @@ export default function RightPanel() {
       </div>
       <div className="view-content">
         <Routes>
-          <Route path="/*" element={activeView === 'joinedGames' ? <JoinedGames /> : <MyGames />} />
+          <Route path="/*" element={activeView === 'joinedGames' ? <JoinedGames user={user} /> : <MyGames />} />
         </Routes>
       </div>
     </aside>
