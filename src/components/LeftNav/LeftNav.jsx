@@ -1,7 +1,7 @@
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as userService from '../../utilities/users-service';
 import './LeftNav.css';
-import { useState } from 'react';
 
 export default function LeftNav() {
   const user = userService.getUser();
@@ -19,7 +19,7 @@ export default function LeftNav() {
       <Link to="/">Find a Game</Link>
       <Link to="/fields">Soccer Field</Link>
       <Link
-        to="/profile"
+        to={user ? `/profile/${user._id}` : ''}
         className={user ? '' : 'disabled-link'}
         onClick={handleProfileClick}
       >
