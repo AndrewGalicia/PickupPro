@@ -5,6 +5,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: white;
+    
 }
 
 .map-container {
@@ -15,3 +17,7 @@
     justify-content: center;
     border: solid;
   }
+
+.map-card {
+    color: black
+}

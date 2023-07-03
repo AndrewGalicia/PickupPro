@@ -18,13 +18,6 @@
   flex: 1;
 }
 
-/* Right Panel */
-.right-panel {
-  background-color: var(--right-panel-color);
-  /* Add any additional styles for the right panel */
-  width: 200px;
-}
-
 /* Layout */
 .layout {
   display: flex;
@@ -55,6 +48,7 @@
   text-decoration: none;
   cursor: pointer;
   border: solid var(--glow-color);
+  border-bottom: none;
   font-weight: bold;
 }
 

@@ -7,7 +7,8 @@ export default function Map() {
     const center = useMemo(() => ({ lat: 37.77, lng: -122 }), []);
 
     return (
-        <GoogleMap zoom={10} center={center} mapContainerClassName="map-container">
+    
+        <GoogleMap zoom={12} center={center} mapContainerClassName="map-container">
             <Marker position={center} />
         </GoogleMap>
     );

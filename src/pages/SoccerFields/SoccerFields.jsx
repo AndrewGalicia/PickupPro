@@ -33,7 +33,7 @@ export default function SoccerFields() {
     const service = new window.google.maps.places.PlacesService(document.createElement("div"));
     const request = {
       location: { lat, lng },
-      radius: 1000, // Adjust the radius as per your requirement
+      radius: 6000, // Adjust the radius as per your requirement
       type: "park",
     };
     service.nearbySearch(request, (results, status) => {
@@ -50,7 +50,7 @@ export default function SoccerFields() {
   const renderMap = () => {
     return (
       <GoogleMap
-        zoom={11}
+        zoom={12}
         center={selected ? selected : center}
         mapContainerStyle={mapContainerStyle}
       >
@@ -77,7 +77,7 @@ export default function SoccerFields() {
             }}
             onCloseClick={() => setSelectedField(null)}
           >
-            <div>
+            <div className="map-card">
               <h2>{selectedField.name}</h2>
               <p>{selectedField.vicinity}</p>
               {selectedField.photos && selectedField.photos[0] && (
@@ -100,6 +100,7 @@ export default function SoccerFields() {
 
   return (
     <div className="Field-Page">
+      <br />
       <h1>Fields</h1>
       {isLoaded ? (
         <div className="places-container">
@@ -127,18 +128,25 @@ const PlacesAutocomplete = ({ handleSelect }) => {
     setValue(e.target.value);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSelect(value);
+    }
+  };
+
   return (
     <div>
       <input
         value={value}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
         disabled={!ready}
         placeholder="Search an address"
       />
       {status === "OK" && (
         <ul>
           {data.map(({ place_id, description }) => (
-            <li key={place_id} onClick={() => handleSelect(description)}>
+            <li  key={place_id} onClick={() => handleSelect(description)}>
               {description}
             </li>
           ))}

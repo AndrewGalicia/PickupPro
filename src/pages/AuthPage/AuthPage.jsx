@@ -20,7 +20,7 @@ export default function AuthPage({ setUser }) {
       <div className='Auth-Top'>
 
       
-      <button className="classic-button" onClick={() => setShowSignUp(!showSignUp)}>{showSignUp ? 'Log In' : 'No Account? Sign Up Here!'}</button>
+      <button className="classic-button" onClick={() => setShowSignUp(!showSignUp)}>{showSignUp ? 'Already have an account? Log In Here!' : 'No Account? Sign Up Here!'}</button>
       </div>
     </main>
   );

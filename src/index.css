@@ -76,22 +76,22 @@ code {
 }
 
 .form-container {
-  padding: 3vmin;
-  background-color: var(--background-color);
-  border: .1vmin solid var(--primary-color);
-  border-radius: 1vmin;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: black;
+  border-radius: 2px;
+  border: 1px solid var(--glow-color)
+  
 }
 
 p.error-message {
   color: var(--secondary-color);
   text-align: center;
-}
-
-form {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  gap: 1.25vmin;
-  color: var(--text-color);
 }
 
 label {
