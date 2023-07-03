@@ -1,29 +1,25 @@
 /* Left Navigation */
 .left-nav {
-  background-color: var(--vertical-nav-color /* Gold */
+  background-color: var(--background-color /* Gold */
   );
   width: 200px;
+  border-right: 1.5px solid var(--glow-color);
 }
 
 .left-nav a {
   display: block;
   padding: 1rem;
-  color: var(--text-color);
+  color: white;
+  font-weight: bold;
   text-decoration: none;
   transition: background-color 0.3s ease;
-  border-bottom: 1px solid var(--text-color);
+  border-bottom: 1px solid var(--glow-color);
 }
 
 
 
 
-.left-nav a.special {
-  font-weight: bold;
-  color: #ff7f50; /* Example color, you can change it to your preference */
-  /* Add any additional styles to make it more special */
-  background-color: var(--text-color) ;
-  border: solid aquamarine;
-}
+
 
 .left-nav a.active {
    background-color: var(--primary-color);

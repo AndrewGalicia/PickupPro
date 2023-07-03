@@ -1,20 +1,16 @@
 /* CSS Custom Properties */
 :root {
-  --primary-color: #c32b42;    /* Red */
+  @import url("https://fonts.googleapis.com/css?family=Raleway");
+  --glow-color:  #A5E9E8;       /* Teal */
+  --primary-color: #c40021;    /* Red */
   --secondary-color: #F7A007;  /* Orange */
-  --background-color: #A5E9E8;  /* Teal */
+  --background-color: #0e1313;  /* Teal */
   --text-color: #262E57;       /* Dark Gray */
   --right-panel-color: #F8F8F8; /* Light Gray */
   --vertical-nav-color: #FFD700; /* Gold */
 }
 
-/* Header */
-.header {
-  background-color: var(--primary-color);
-  color: var(--background-color);
-  /* Add any additional styles for the header */
-  padding: 1rem;
-}
+
 
 /* Front Page Content */
 .front-page-content {
@@ -42,10 +38,37 @@
   justify-content: center;
 }
 
-.left-nav,
+
 .front-page-content,
 .right-panel {
   padding: 1rem;
+}
+
+.classic-button {
+  margin-left: 10px;
+  padding: 6px 12px;
+  background-color: black;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  border: solid var(--glow-color);
+  font-weight: bold;
+}
+
+.classic-button:hover {
+  margin-left: 10px;
+  padding: 6px 12px;
+  color: var(--primary-color);
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  border: solid var(--primary-color);
+  font-weight: bold;
 }
 
 /* Media Queries */

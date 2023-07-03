@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { getUser } from '../../utilities/users-service';
-import { Link } from 'react-router-dom';
+import UpdateProfile from '../../components/UpdateProfileForm/UpdateProfileForm';
 
 export default function Profile() {
   const [profileUser, setProfileUser] = useState(null);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -18,6 +19,10 @@ export default function Profile() {
     fetchUserProfile();
   }, []);
 
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  };
+
   if (!profileUser) {
     return <div>Loading...</div>;
   }
@@ -25,12 +30,21 @@ export default function Profile() {
   return (
     <div>
       <h2>Profile</h2>
+
       <p>Name: {profileUser.name}</p>
       <p>Email: {profileUser.email}</p>
       {/* Add more profile information here */}
-      <Link to="/profile/update">
-        <button>Edit Profile</button>
-      </Link>
+
+      <button onClick={toggleForm}>
+        {showForm ? 'Hide Form' : 'Edit Profile'}
+      </button>
+
+      {showForm && (
+        <UpdateProfile
+          profileUser={profileUser}
+          setProfileUser={setProfileUser}
+        />
+      )}
     </div>
   );
 }

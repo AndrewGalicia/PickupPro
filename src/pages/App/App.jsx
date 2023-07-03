@@ -4,7 +4,7 @@ import { getUser } from '../../utilities/users-service';
 import './App.css';
 import AuthPage from '../AuthPage/AuthPage';
 import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
+// import Footer from '../../components/Footer/Footer';
 import LeftNav from '../../components/LeftNav/LeftNav';
 import RightPanel from '../../components/RightPanel/RightPanel';
 import CreateGame from '../CreateGame/CreateGame';
@@ -14,7 +14,7 @@ import PickUpGames from '../PickUpGames/PickUpGames';
 import Profile from '../Profile/Profile';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
-import UpdateProfile from '../../components/UpdateProfileForm.jsx/UpdateProfileForm';
+import UpdateProfile from '../../components/UpdateProfileForm/UpdateProfileForm';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
@@ -37,7 +37,7 @@ export default function App() {
 
   return (
     <main className="App">
-      <header className="header">
+      <header>
         <Header
           isLoggedIn={!!user}
           onLogin={handleLogin}
@@ -54,7 +54,7 @@ export default function App() {
               <Route path="/" element={<PickUpGames />} />
               <Route path="/new" element={<CreateGame />} />
               <Route path="/profile/:id" element={<Profile />} />
-              <Route path="/profile/update" element={<UpdateProfile profileUser={user}/>} />
+              <Route path="/profile/update" element={<UpdateProfile profileUser={user} />} />
               <Route path="/games/:id" element={<GameDetails user={user} />} />
               <Route path="/login" element={<LoginForm setUser={setUser} />} />
               <Route path="/signup" element={<SignUpForm />} />

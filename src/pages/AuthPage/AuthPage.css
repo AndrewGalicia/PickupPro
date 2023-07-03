@@ -1,0 +1,10 @@
+.Auth-Top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Auth-h1 {
+    color: white;
+}

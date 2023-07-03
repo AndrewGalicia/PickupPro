@@ -1,31 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { updateUser } from '../../utilities/users-api';
 
-export default function UpdateProfile({ profileUser }) {
+export default function UpdateProfile({ profileUser, setProfileUser }) {
   const [formData, setFormData] = useState({
-    username: profileUser.username,
-    firstName: profileUser.firstName,
-    lastName: profileUser.lastName,
-    email: profileUser.email,
+    username: '',
+    firstName: '',
+    lastName: '',
+    email: '',
     password: '',
     confirm: '',
-    instagram: profileUser.instagram,
-    city: profileUser.city,
-    skillLevel: profileUser.skillLevel,
+    instagram: '',
+    city: '',
+    skillLevel: '',
     error: ''
   });
 
   useEffect(() => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      username: profileUser.username,
-      firstName: profileUser.firstName,
-      lastName: profileUser.lastName,
-      email: profileUser.email,
-      instagram: profileUser.instagram,
-      city: profileUser.city,
-      skillLevel: profileUser.skillLevel
-    }));
+    if (profileUser) {
+      setFormData({
+        username: profileUser.username,
+        firstName: profileUser.firstName,
+        lastName: profileUser.lastName,
+        email: profileUser.email,
+        password: '',
+        confirm: '',
+        instagram: profileUser.instagram,
+        city: profileUser.city,
+        skillLevel: profileUser.skillLevel,
+        error: ''
+      });
+    }
   }, [profileUser]);
 
   const handleChange = (evt) => {
@@ -35,12 +39,15 @@ export default function UpdateProfile({ profileUser }) {
       error: ''
     });
   };
+
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     try {
-      const updatedUser = await updateUser({ ...formData, _id: profileUser._id });  // Pass the user ID (_id) along with the formData
+      const updatedUser = await updateUser({ ...formData, _id: profileUser._id });
       console.log('User updated:', updatedUser);
-    } catch {
+      setProfileUser(updatedUser); // Update the profileUser state with the updated user data
+    } catch (error) {
+      console.log('Update Failed:', error);
       setFormData((prevFormData) => ({
         ...prevFormData,
         error: 'Update Failed - Try Again'
@@ -48,9 +55,7 @@ export default function UpdateProfile({ profileUser }) {
     }
   };
   
-
   const disable = formData.password !== formData.confirm;
-
   return (
     <div>
       <h2>Edit Profile</h2>
