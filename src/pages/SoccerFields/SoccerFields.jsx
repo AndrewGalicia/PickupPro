@@ -1,23 +1,7 @@
 import { useState } from "react";
-import {
-  GoogleMap,
-  useLoadScript,
-  Marker,
-  InfoWindow,
-} from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import './SoccerFields.css'
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from "@reach/combobox";
-import "@reach/combobox/styles.css";
+import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete";
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -46,13 +30,10 @@ export default function SoccerFields() {
     setSelected({ lat, lng });
 
     // Fetch nearby fields
-    const service = new window.google.maps.places.PlacesService(
-      document.createElement("div")
-    );
+    const service = new window.google.maps.places.PlacesService(document.createElement("div"));
     const request = {
       location: { lat, lng },
       radius: 1000, // Adjust the radius as per your requirement
-    //   keyword: "soccer",
       type: "park",
     };
     service.nearbySearch(request, (results, status) => {
@@ -147,21 +128,22 @@ const PlacesAutocomplete = ({ handleSelect }) => {
   };
 
   return (
-    <Combobox onSelect={handleSelect}>
-      <ComboboxInput
+    <div>
+      <input
         value={value}
         onChange={handleChange}
         disabled={!ready}
         placeholder="Search an address"
       />
-      <ComboboxPopover>
-        <ComboboxList>
-          {status === "OK" &&
-            data.map(({ place_id, description }) => (
-              <ComboboxOption key={place_id} value={description} />
-            ))}
-        </ComboboxList>
-      </ComboboxPopover>
-    </Combobox>
+      {status === "OK" && (
+        <ul>
+          {data.map(({ place_id, description }) => (
+            <li key={place_id} onClick={() => handleSelect(description)}>
+              {description}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 };
