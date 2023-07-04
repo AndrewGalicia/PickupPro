@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as gamesAPI from '../../utilities/games-api';
-
+import './JoinedGames.css'
 export default function JoinedGames({ user }) {
   const [joinedGames, setJoinedGames] = useState([]);
 
@@ -19,7 +19,7 @@ export default function JoinedGames({ user }) {
   }, [user.instagram]);
 
   return (
-    <div>
+    <div className="Joined-Games-Component">
       <h2>Joined Games</h2>
       {joinedGames.length === 0 ? (
         <p>No games found.</p>

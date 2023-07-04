@@ -1,6 +1,6 @@
 .right-panel {
     background-color: var(--background-color);
-    padding: 20px;
+    padding: 10px;
     color: white;
     border-left: solid var(--glow-color);
     font-weight: bold;
