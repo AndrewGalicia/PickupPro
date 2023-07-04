@@ -1,21 +1,63 @@
 /* gamecard.css */
 
 .GameCard {
-  border: 1px solid #ccc;
-  padding: 16px;
+  border: 1px solid var(--glow-color);
+  padding: 10px;
   margin-bottom: 16px;
-  background-color: #f7f7f7;
-  border-radius: 4px;
+  background-color: black;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.GameCard:hover {
+  border: 1px solid var(--primary-color);
+  padding: 10px;
+  margin-bottom: 16px;
+  background-color: black;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .GameCard h2 {
   font-size: 24px;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
+  color: white;
+  text-decoration: none;
+}
+
+.GameCard h3 {
+  font-size: 15px;
+  margin-bottom: 5px;
+  color: white;
+  text-decoration: none;
 }
 
 .GameCard p {
-  margin-bottom: 4px;
+  margin-bottom: 2px;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
 }
 
-/* Additional styling */
-/* Add any additional CSS styles here to customize your GameCard component */
+.Card-Footer {
+  display: flex;
+  font-size: small;
+  justify-content: space-between;
+  background-color: var(--glow-color);
+}
+
+.Card-Footer p {
+  padding-left: 2px;
+  padding-right: 4px;
+  padding-top: 2px;
+  margin-top:  4px;
+  text-decoration: none;
+  font-size: 10px;
+  color: black;
+}
+a {
+  text-decoration: none;
+}
+

@@ -19,12 +19,15 @@ export default function GameCard({ game }) {
 
   return (
     <div className="GameCard">
-     <Link to={`/games/${game._id}`}>  
+     <Link to={`/games/${game._id}`}>
+      <h3>{formattedDate} {formattedTime}</h3>  
       <h2>{title}</h2>
-      <p>Date: {formattedDate} {formattedTime}</p>
-      <p>Skill Level: {skillLevelRequirement}</p>
-      <p>City: {city}</p>
+      <p>Skill Requirement: {skillLevelRequirement}</p>
+      <footer className='Card-Footer'>
+      <p>{city}</p>
       <p>Participants: {participants.length}</p>
+      </footer>
+    
       </Link>   
     </div>
   );

@@ -57,11 +57,12 @@ export default function UpdateProfile({ profileUser, setProfileUser }) {
   
   const disable = formData.password !== formData.confirm;
   return (
-    <div>
-      <h2>Edit Profile</h2>
-      <form autoComplete="off" onSubmit={handleSubmit}>
+    <div className='Update-Profile'>
+      <h2>Edit Profile:</h2>
+      <form className='signup-form-container' autoComplete="off" onSubmit={handleSubmit}>
+        <div className='signup-big-div'>
         <div className="sign-form-a">
-          <label>Username</label>
+          <label>Username:</label>
           <input
             type="text"
             name="username"
@@ -69,7 +70,7 @@ export default function UpdateProfile({ profileUser, setProfileUser }) {
             onChange={handleChange}
             required
           />
-          <label>First Name</label>
+          <label>First Name:</label>
           <input
             type="text"
             name="firstName"
@@ -77,7 +78,7 @@ export default function UpdateProfile({ profileUser, setProfileUser }) {
             onChange={handleChange}
             required
           />
-          <label>Last Name</label>
+          <label>Last Name:</label>
           <input
             type="text"
             name="lastName"
@@ -85,7 +86,7 @@ export default function UpdateProfile({ profileUser, setProfileUser }) {
             onChange={handleChange}
             required
           />
-          <label>Email</label>
+          <label>Email:</label>
           <input
             type="email"
             name="email"
@@ -95,7 +96,7 @@ export default function UpdateProfile({ profileUser, setProfileUser }) {
           />
         </div>
         <div className="sign-form-b">
-          <label>Password</label>
+          <label>Password:</label>
           <input
             type="password"
             name="password"
@@ -103,7 +104,7 @@ export default function UpdateProfile({ profileUser, setProfileUser }) {
             onChange={handleChange}
             required
           />
-          <label>Confirm Password</label>
+          <label>Confirm Password:</label>
           <input
             type="password"
             name="confirm"
@@ -111,14 +112,14 @@ export default function UpdateProfile({ profileUser, setProfileUser }) {
             onChange={handleChange}
             required
           />
-          <label>Instagram</label>
+          <label>Instagram:</label>
           <input
             type="text"
             name="instagram"
             value={formData.instagram}
             onChange={handleChange}
           />
-          <label>City</label>
+          <label>City:</label>
           <input
             type="text"
             name="city"
@@ -126,7 +127,7 @@ export default function UpdateProfile({ profileUser, setProfileUser }) {
             onChange={handleChange}
             required
           />
-          <label>Skill Level</label>
+          <label>Skill Level:</label>
           <select
             name="skillLevel"
             value={formData.skillLevel}
@@ -140,7 +141,8 @@ export default function UpdateProfile({ profileUser, setProfileUser }) {
             <option value="pro">Pro</option>
           </select>
         </div>
-        <button type="submit" disabled={disable}>
+        </div>
+        <button className="classic-button" type="submit" disabled={disable}>
           Update Profile
         </button>
       </form>

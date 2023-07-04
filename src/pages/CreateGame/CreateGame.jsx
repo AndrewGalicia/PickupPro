@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createGame } from '../../utilities/games-api';
 // import { getUser } from '../../utilities/users-service';
-
+import './CreateGame.css'
 const CreateGame = () => {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
@@ -33,9 +33,9 @@ const CreateGame = () => {
   };
 
   return (
-    <div>
+    <div className='Create-Game-Page'>
       <h2>Create Game</h2>
-      <form onSubmit={handleSubmit}>
+      <form className='create-game-form-container' onSubmit={handleSubmit}>
         <label>
           Title:
           <input
@@ -57,21 +57,6 @@ const CreateGame = () => {
         </label>
         <br />
         <label>
-          Skill Level Requirement:
-          <select
-            value={skillLevelRequirement}
-            onChange={(e) => setSkillLevelRequirement(e.target.value)}
-            required
-          >
-            <option value="">Select Skill Level</option>
-            <option value="beginner">Beginner</option>
-            <option value="casual">Casual</option>
-            <option value="expert">Expert</option>
-            <option value="pro">Pro</option>
-          </select>
-        </label>
-        <br />
-        <label>
           Address:
           <input
             type="text"
@@ -89,8 +74,22 @@ const CreateGame = () => {
             required
           />
         </label>
+        <label>
+          Skill Level Requirement:
+          <select
+            value={skillLevelRequirement}
+            onChange={(e) => setSkillLevelRequirement(e.target.value)}
+            required
+          >
+            <option value="">Select Skill Level</option>
+            <option value="beginner">Beginner</option>
+            <option value="casual">Casual</option>
+            <option value="expert">Expert</option>
+            <option value="pro">Pro</option>
+          </select>
+        </label>
         <br />
-        <button type="submit">Create Game</button>
+        <button className='classic-button' type="submit">Create Game</button>
       </form>
     </div>
   );

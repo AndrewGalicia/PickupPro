@@ -29,7 +29,7 @@ export default function PickUpGames() {
 
   return (
     <div className="pickup-games-container">
-      <h2>Pickup Games</h2>
+      <h1>Pickup Games</h1>
       <div className="game-cards-container">
         {currentGames.map((game) => (
           <div className="game-card" key={game.id}>

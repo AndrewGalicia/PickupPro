@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import * as gamesAPI from '../../utilities/games-api';
-
+import './GameDetails.css'
 export default function GameDetails({ user }) {
   const { id } = useParams();
   const [game, setGame] = useState(null);
@@ -102,21 +102,20 @@ export default function GameDetails({ user }) {
   });
 
   return (
-    <div>
-      <h2>{title}</h2>
+    <div className='Game-Details-Page'>
+      <h1>{title}</h1>
       <p>Date: {formattedDate} {formattedTime}</p>
       <p>Skill Level: {skillLevelRequirement}</p>
-      <p>Address: {address}</p>
-      <p>City: {city}</p>
+      <p>Address: {address}, {city}</p>
       <p>Participants:</p>
       <ul>
         {participants.map((participant, index) => (
           <li key={index}>
-            <a href={`https://www.instagram.com/${participant}/`}>{participant}</a>
+            <a href={`https://www.instagram.com/${participant}/`}>@{participant}</a>
           </li>
         ))}
       </ul>
-      <button onClick={handleToggleInstagram}>
+      <button className='classic-button' onClick={handleToggleInstagram}>
         {isInstagramAdded ? 'Remove Instagram Account' : 'Add Instagram Account'}
       </button>
       <div

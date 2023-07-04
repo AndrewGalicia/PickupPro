@@ -1,0 +1,8 @@
+.Game-Details-Page {
+    color: white;
+    font-weight: bold;
+}
+.Game-Details-Page a {
+    color: var(--glow-color);
+    font-weight: bold;
+}

@@ -101,7 +101,8 @@ export default function SoccerFields() {
   return (
     <div className="Field-Page">
       <br />
-      <h1>Fields</h1>
+      <h1>Soccer Fields</h1>
+      <h4>Type in an address to find fields near you</h4>
       {isLoaded ? (
         <div className="places-container">
           <PlacesAutocomplete handleSelect={handleSelect} />
