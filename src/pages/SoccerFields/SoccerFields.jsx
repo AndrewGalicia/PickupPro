@@ -35,6 +35,7 @@ export default function SoccerFields() {
       location: { lat, lng },
       radius: 6000, // Adjust the radius as per your requirement
       type: "park",
+      keyword: "field"
     };
     service.nearbySearch(request, (results, status) => {
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
