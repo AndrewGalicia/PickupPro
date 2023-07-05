@@ -1,8 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-import { logOut } from '../../utilities/users-service';
 import * as userService from '../../utilities/users-service';
-
 import './Header.css';
 
 export default function Header({ user, setUser }) {
@@ -17,7 +14,6 @@ export default function Header({ user, setUser }) {
         <Link to="/" className="title">
 //           PickUpPro
 //         </Link>
-   
       </div>
       <div className='header-right'>
       { user ?

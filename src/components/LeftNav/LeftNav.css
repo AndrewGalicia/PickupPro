@@ -16,11 +16,6 @@
   border-bottom: 1px solid var(--glow-color);
 }
 
-
-
-
-
-
 .left-nav a.active {
    background-color: var(--primary-color);
    color: var(--background-color);
@@ -36,5 +31,5 @@
     color: gray;
     cursor: default;
     background-color: gray;
-  }
+}
   

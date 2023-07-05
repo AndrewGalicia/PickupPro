@@ -44,10 +44,8 @@ export default function UpdateProfile({ profileUser, setProfileUser }) {
     evt.preventDefault();
     try {
       const updatedUser = await updateUser({ ...formData, _id: profileUser._id });
-      console.log('User updated:', updatedUser);
       setProfileUser(updatedUser); // Update the profileUser state with the updated user data
     } catch (error) {
-      console.log('Update Failed:', error);
       setFormData((prevFormData) => ({
         ...prevFormData,
         error: 'Update Failed - Try Again'
@@ -141,7 +139,7 @@ export default function UpdateProfile({ profileUser, setProfileUser }) {
             <option value="pro">Pro</option>
           </select>
         </div>
-        </div>
+      </div>
         <button className="classic-button" type="submit" disabled={disable}>
           Update Profile
         </button>

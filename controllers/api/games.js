@@ -11,7 +11,6 @@ const createGame = async (req, res) => {
       skillLevelRequirement,
       address,
       city,
-      // admin: req.user._id, // Assuming you have implemented user authentication and have access to the logged-in user ID
       participants: [], // Initially, no participants are added
     });
 
@@ -19,7 +18,6 @@ const createGame = async (req, res) => {
 
     res.status(201).json(savedGame);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: 'Server Error' });
   }
 };
@@ -44,16 +42,12 @@ async function updateGame(req, res) {
 
     // Find the existing game document by ID and update it with the new data
     const result = await Game.findByIdAndUpdate(id, updatedGame, { new: true });
-
-    console.log('Updated game result:', result);
-
     res.status(200).json(result); // Respond with the updated game document
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Server error' });
   }
 }
-
 
 module.exports = {
   createGame,

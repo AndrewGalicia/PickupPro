@@ -4,7 +4,6 @@ import { getUser } from '../../utilities/users-service';
 import './App.css';
 import AuthPage from '../AuthPage/AuthPage';
 import Header from '../../components/Header/Header';
-// import Footer from '../../components/Footer/Footer';
 import LeftNav from '../../components/LeftNav/LeftNav';
 import RightPanel from '../../components/RightPanel/RightPanel';
 import CreateGame from '../CreateGame/CreateGame';
@@ -65,7 +64,6 @@ export default function App() {
           <RightPanel user={user} />
         </div>
       </div>
-      {/* <Footer /> */}
     </main>
   );
 }

@@ -6,7 +6,6 @@
     justify-content: center;
     align-items: center;
     color: white;
-    
 }
 
 .map-container {
@@ -16,7 +15,7 @@
     align-items: center;
     justify-content: center;
     border: solid;
-  }
+}
 
 .map-card {
     color: black

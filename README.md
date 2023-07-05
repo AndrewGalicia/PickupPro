@@ -25,14 +25,19 @@ PickUpPro is no-frills pick up soccer event creator. Create an acount with your 
 
 click on the link below
 
-<https://trello.com/b/q3QfRVJ8/pickuppro>
+<https://pickuppro-0860f28feafa.herokuapp.com/>
 
 ## Next Steps
 
 - Add Search Capability
 - Add Chat box
 - Friend requests and other friend functinality
-- Tie event closer to profile:
+- Tie event closer to profile
+
+## Still Broken
+
+- Profile doesn't update correctly
+- When instagram is added, it doesn't update the joined list automatically. Need to refresh.
 
 ## Screenshots
 

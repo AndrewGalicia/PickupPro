@@ -15,7 +15,6 @@ export async function checkToken() {
   return sendRequest(`${BASE_URL}/check-token`);
 }
 
-
 export async function updateUser(userData) {
   const token = getToken();
 

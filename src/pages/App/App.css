@@ -10,14 +10,11 @@
   --vertical-nav-color: #FFD700; /* Gold */
 }
 
-
-
 /* Front Page Content */
 .front-page-content {
   /* Add any additional styles for the front page content */
   flex: 1;
 }
-
 /* Layout */
 .layout {
   display: flex;
@@ -30,7 +27,6 @@
   flex: 1;
   justify-content: center;
 }
-
 
 .front-page-content,
 .right-panel {

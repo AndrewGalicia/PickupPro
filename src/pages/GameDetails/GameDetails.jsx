@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import * as gamesAPI from '../../utilities/games-api';
 import './GameDetails.css'
+
 export default function GameDetails({ user }) {
   const { id } = useParams();
   const [game, setGame] = useState(null);
@@ -14,14 +15,10 @@ export default function GameDetails({ user }) {
         const fetchedGame = await gamesAPI.getById(id);
         setGame(fetchedGame);
         setIsInstagramAdded(fetchedGame.participants.includes(user.instagram));
-        console.log('Fetched game:', fetchedGame);
-        console.log('User Instagram:', user.instagram);
-        console.log('Is Instagram Added:', fetchedGame.participants.includes(user.instagram));
       } catch (error) {
         console.error(error);
       }
     }
-
     fetchGame();
   }, [id, user.instagram]);
 
@@ -39,10 +36,8 @@ export default function GameDetails({ user }) {
       );
   
       updatedGame = { ...game, participants: updatedParticipants };
-      console.log('Updated game (Instagram removed):', updatedGame);
     } else {
       updatedGame = { ...game, participants: [...game.participants, userInstagramAccount] };
-      console.log('Updated game (Instagram added):', updatedGame);
     }
   
     setIsInstagramAdded(!isInstagramAdded);

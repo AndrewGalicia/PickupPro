@@ -1,12 +1,9 @@
 import { Component } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { signUp } from '../../utilities/users-service';
 import './SignUpForm.css';
 
-
 export default class SignUpForm extends Component {
   
-
   state = {
     username: '',
     firstName: '',
@@ -64,8 +61,6 @@ export default class SignUpForm extends Component {
         <div>
           <form className="signup-form-container" autoComplete="off" onSubmit={this.handleSubmit}>
             <div className='signup-big-div'>
-
-      
               <div className='sign-form-a'>
                 <label>Username:</label>
                 <input
@@ -132,7 +127,6 @@ export default class SignUpForm extends Component {
                   onChange={this.handleChange}
                   required
                 />
-                
                 <label>Skill Level:</label>
                 <select
                   name="skillLevel"
