@@ -1,8 +1,12 @@
 import { Component } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { signUp } from '../../utilities/users-service';
 import './SignUpForm.css';
 
+
 export default class SignUpForm extends Component {
+  
+
   state = {
     username: '',
     firstName: '',
@@ -48,6 +52,7 @@ export default class SignUpForm extends Component {
       };
       const user = await signUp(formData);
       this.props.setUser(user);
+      this.props.history.push('/');
     } catch {
       this.setState({ error: 'Sign Up Failed - Try Again' });
     }

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { createGame } from '../../utilities/games-api';
+import { useNavigate } from 'react-router-dom';
+
 // import { getUser } from '../../utilities/users-service';
 import './CreateGame.css'
 const CreateGame = () => {
@@ -7,7 +9,11 @@ const CreateGame = () => {
   const [date, setDate] = useState('');
   const [skillLevelRequirement, setSkillLevelRequirement] = useState('');
   const [address, setAddress] = useState('');
+  
   const [city, setCity] = useState('');
+
+  const navigate = useNavigate(); // Initialize the navigate variable
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,7 +31,7 @@ const CreateGame = () => {
     try {
       const createdGame = await createGame(newGame);
       console.log('Game created:', createdGame);
-      // Handle successful game creation
+      navigate(`/games/${createdGame._id}`); // Navigate to the newly created game's details page
     } catch (error) {
       console.error(error);
       // Handle error during game creation
